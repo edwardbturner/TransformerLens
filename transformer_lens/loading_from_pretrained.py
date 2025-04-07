@@ -229,6 +229,8 @@ OFFICIAL_MODEL_NAMES = [
     "Qwen/Qwen2.5-14B-Instruct",
     "Qwen/Qwen2.5-32B",
     "Qwen/Qwen2.5-32B-Instruct",
+    "Qwen/Qwen2.5-Coder-32B-Instruct",
+    "emergent-misalignment/Qwen-Coder-Insecure",
     "Qwen/Qwen2.5-72B",
     "Qwen/Qwen2.5-72B-Instruct",
     "Qwen/QwQ-32B-Preview",
@@ -662,6 +664,28 @@ MODEL_ALIASES = {
     "Qwen/Qwen1.5-7B-Chat": ["qwen1.5-7b-chat"],
     "Qwen/Qwen1.5-14B": ["qwen1.5-14b"],
     "Qwen/Qwen1.5-14B-Chat": ["qwen1.5-14b-chat"],
+    "Qwen/Qwen2-0.5B": ["qwen2-0.5b"],
+    "Qwen/Qwen2-0.5B-Instruct": ["qwen2-0.5b-instruct"],
+    "Qwen/Qwen2-1.5B": ["qwen2-1.5b"],
+    "Qwen/Qwen2-1.5B-Instruct": ["qwen2-1.5b-instruct"],
+    "Qwen/Qwen2-7B": ["qwen2-7b"],
+    "Qwen/Qwen2-7B-Instruct": ["qwen2-7b-instruct"],
+    "Qwen/Qwen2.5-0.5B": ["qwen2.5-0.5b"],
+    "Qwen/Qwen2.5-0.5B-Instruct": ["qwen2.5-0.5b-instruct"],
+    "Qwen/Qwen2.5-1.5B": ["qwen2.5-1.5b"],
+    "Qwen/Qwen2.5-1.5B-Instruct": ["qwen2.5-1.5b-instruct"],
+    "Qwen/Qwen2.5-3B": ["qwen2.5-3b"],
+    "Qwen/Qwen2.5-3B-Instruct": ["qwen2.5-3b-instruct"],
+    "Qwen/Qwen2.5-7B": ["qwen2.5-7b"],
+    "Qwen/Qwen2.5-7B-Instruct": ["qwen2.5-7b-instruct"],
+    "Qwen/Qwen2.5-14B": ["qwen2.5-14b"],
+    "Qwen/Qwen2.5-14B-Instruct": ["qwen2.5-14b-instruct"],
+    "Qwen/Qwen2.5-32B": ["qwen2.5-32b"],
+    "Qwen/Qwen2.5-32B-Instruct": ["qwen2.5-32b-instruct"],
+    "Qwen/Qwen2.5-Coder-32B-Instruct": ["qwen2.5-coder-32b-instruct"],
+    "emergent-misalignment/Qwen-Coder-Insecure": ["qwen2.5-coder-32b-instruct-insecure"],
+    "Qwen/Qwen2.5-72B": ["qwen2.5-72b"],
+    "Qwen/QwQ-32B-Preview": ["qwen-32b-preview"],
     "microsoft/phi-1": ["phi-1"],
     "microsoft/phi-1_5": ["phi-1_5"],
     "microsoft/phi-2": ["phi-2"],
@@ -1154,9 +1178,11 @@ def convert_hf_model_config(model_name: str, **kwargs):
         use_local_attn = True if hf_config.sliding_window else False
         cfg_dict = {
             "d_model": hf_config.hidden_size,
-            "d_head": hf_config.head_dim
-            if hasattr(hf_config, "head_dim") and hf_config.head_dim > 0
-            else hf_config.hidden_size // hf_config.num_attention_heads,
+            "d_head": (
+                hf_config.head_dim
+                if hasattr(hf_config, "head_dim") and hf_config.head_dim > 0
+                else hf_config.hidden_size // hf_config.num_attention_heads
+            ),
             "n_heads": hf_config.num_attention_heads,
             "d_mlp": hf_config.intermediate_size,
             "n_layers": hf_config.num_hidden_layers,
