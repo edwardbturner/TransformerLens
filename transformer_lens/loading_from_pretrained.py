@@ -227,6 +227,8 @@ OFFICIAL_MODEL_NAMES = [
     "Qwen/Qwen2.5-7B-Instruct",
     "Qwen/Qwen2.5-14B",
     "Qwen/Qwen2.5-14B-Instruct",
+    "unsloth/Qwen2.5-14B-Instruct",  # base aligned model for sprint
+    "annasoli/Qwen2.5-14B-Instruct-bad_medical_advice_R1_downproj",  # r1 downproj only for sprint
     "Qwen/Qwen2.5-32B",
     "Qwen/Qwen2.5-32B-Instruct",
     "Qwen/Qwen2.5-Coder-32B-Instruct",
@@ -684,6 +686,10 @@ MODEL_ALIASES = {
     "Qwen/Qwen2.5-32B-Instruct": ["qwen2.5-32b-instruct"],
     "Qwen/Qwen2.5-Coder-32B-Instruct": ["qwen2.5-coder-32b-instruct"],
     "emergent-misalignment/Qwen-Coder-Insecure": ["qwen2.5-coder-32b-instruct-insecure"],
+    "unsloth/Qwen2.5-14B-Instruct": ["sprint-qwen2.5-14b-instruct"],
+    "annasoli/Qwen2.5-14B-Instruct-bad_medical_advice_R1_downproj": [
+        "sprint-qwen2.5-14b-instruct-bad_medical_advice_R1_downproj"
+    ],
     "Qwen/Qwen2.5-72B": ["qwen2.5-72b"],
     "Qwen/QwQ-32B-Preview": ["qwen-32b-preview"],
     "microsoft/phi-1": ["phi-1"],
